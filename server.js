@@ -4,14 +4,13 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import multer from "multer";
-import Photo from "../models/Photo.js";
-import productRoutes from "../routes/productRoutes.js";
-import contactRoutes from "../routes/contactRoutes.js";
+import Photo from "./models/Photo.js";
+import productRoutes from "./routes/productRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -50,4 +49,5 @@ app.post("/upload", upload.single("image"), async (req, res) => {
 app.use("/api/product", productRoutes);
 app.use("/api/contact", contactRoutes);
 
-module.exports = app;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
