@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import multer from "multer";
-import Photo from "./models/Photo.js";
-import productRoutes from "./routes/productRoutes.js";
-import contactRoutes from "./routes/contactRoutes.js";
+import Photo from "../models/Photo.js";
+import productRoutes from "../routes/productRoutes.js";
+import contactRoutes from "../routes/contactRoutes.js";
 
 dotenv.config();
 
@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 
 app.get("/", (req, res) => {
-  res.json({ message: "Hello from Express on Vercel!" });
+  res.json({ message: "Server Running..." });
 });
 
 app.post("/upload", upload.single("image"), async (req, res) => {
@@ -49,5 +49,4 @@ app.post("/upload", upload.single("image"), async (req, res) => {
 app.use("/api/product", productRoutes);
 app.use("/api/contact", contactRoutes);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
+export default app;

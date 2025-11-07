@@ -1,10 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "app.js",
   "type": "module",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node server.js"
+    "dev": "node api/index.js"
   },
   "keywords": [],
   "author": "",
