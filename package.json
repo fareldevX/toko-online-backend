@@ -4,18 +4,22 @@
   "type": "module",
   "main": "api/index.js",
   "scripts": {
-    "dev": "node api/index.js"
+    "dev": "node api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fareldevX/toko-online-backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fareldevX/toko-online-backend/issues"
+  },
+  "homepage": "https://github.com/fareldevX/toko-online-backend#readme",
   "description": "",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "mongoose": "^8.19.2",
-    "multer": "^2.0.2",
-    "path": "^0.12.7"
+    "express": "^5.1.0"
   }
 }
