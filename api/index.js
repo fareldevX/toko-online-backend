@@ -2,11 +2,15 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import Product from "../models/Product.js";
+import Product from "./models/Product.js";
 
 dotenv.config();
 
 const app = express();
+
+if (!process.env.MONGO_URI) {
+  console.error("❌ MONGO_URI not found in environment variables");
+}
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -33,7 +37,8 @@ app.post("/api/product", async (req, res) => {
 
     res.status(201).json(p);
   } catch (e) {
-    console.log(e);
+    console.error("Error adding product:", e);
+    res.status(500).json({ message: "Failed to add product" });
   }
 });
 
