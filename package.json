@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "type": "module",
-  "main": "api/index.js",
+  "main": "api/app.js",
   "scripts": {
-    "dev": "node api/index.js",
+    "dev": "node api/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
