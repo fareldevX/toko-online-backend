@@ -49,4 +49,23 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const product = await Product.findByIdAndDelete(id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found!" });
+    }
+
+    res.status(200).json({
+      message: "Successfully deleted!",
+      product,
+    });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: "Failed to delete product!" });
+  }
+});
+
 export default router;
