@@ -9,17 +9,17 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-router.get("/api/product", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const products = await Product.find().sort({ createdAt: -1 });
     res.json(products);
   } catch (e) {
-    console.error("Failed to get product!");
-    res.status(500).json({ error: e });
+    console.error(e);
+    res.status(500).json({ error: "Failed to get products!" });
   }
 });
 
-router.post("/api/product", upload.single("image"), async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ message: "No image uploaded!" });
@@ -44,8 +44,8 @@ router.post("/api/product", upload.single("image"), async (req, res) => {
 
     res.status(201).json(product);
   } catch (e) {
-    console.error("Failed to add new product!");
-    res.status(500).json({ error: e });
+    console.error(e);
+    res.status(500).json({ error: "Failed to add new product!" });
   }
 });
 

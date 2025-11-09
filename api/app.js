@@ -15,9 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected..."))
-  .catch((e) => console.log("Failed to Connection MongoDB!, " + e));
+  .catch((e) => console.error("Failed to Connection MongoDB!, " + e));
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -29,6 +32,6 @@ app.get("/", (req, res) => {
   res.json({ status: "Server is Running!" });
 });
 
-app.use("/", productRoutes);
+app.use("/api/product", productRoutes);
 
 export default app;
