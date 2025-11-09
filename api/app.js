@@ -31,6 +31,4 @@ app.get("/", (req, res) => {
 
 app.use("/api/product", productRoutes);
 
-// export default app;
-
-app.listen(3000, () => console.log("Server is running..."));
+export default app;
