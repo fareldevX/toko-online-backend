@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
 
 const schemaProduct = new Schema({
-  imageUrl: String,
   title: { type: String, required: true },
   description: String,
+  imageUrl: String,
   createdAt: { type: Date, default: Date.now },
 });
 
