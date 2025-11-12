@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import { v2 as cloudinary } from "cloudinary";
-
 import productRoutes from "./routes/productRoutes.js";
+import apiKeyRoutes from "./routes/apiKeyRoutes.js";
+import { checkApiKey } from "./middleware/checkApiKey.js";
 
 dotenv.config();
 
@@ -29,6 +30,9 @@ app.get("/", (req, res) => {
   res.json({ status: "Server is Running!" });
 });
 
-app.use("/api/product", productRoutes);
+app.use("/api/key", apiKeyRoutes);
+app.use("/api/product", checkApiKey, productRoutes);
 
-export default app;
+// export default app;
+
+app.listen(3000, () => console.log("Server is running..."));

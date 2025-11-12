@@ -1,7 +1,6 @@
 import express from "express";
 import { v2 as cloudinary } from "cloudinary";
 import multer from "multer";
-
 import Product from "../models/Product.js";
 
 const router = express.Router();
