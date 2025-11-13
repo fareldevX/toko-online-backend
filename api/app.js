@@ -1,10 +1,11 @@
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import { v2 as cloudinary } from "cloudinary";
+import { connectDB } from "./config/db.js";
+import { setCloudinary } from "./config/cloudinaryConfig.js";
 import productRoutes from "./routes/productRoutes.js";
 import apiKeyRoutes from "./routes/apiKeyRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
 import { checkApiKey } from "./middleware/checkApiKey.js";
 
 dotenv.config();
@@ -15,16 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected..."))
-  .catch((e) => console.error("Failed to Connection MongoDB!, " + e));
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+connectDB();
+setCloudinary();
 
 app.get("/", (req, res) => {
   res.json({ status: "Server is Running!" });
@@ -32,5 +25,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/key", apiKeyRoutes);
 app.use("/api/product", checkApiKey, productRoutes);
+app.use("/api/contact", contactRoutes);
 
 export default app;
+
+// app.listen(3000, () => console.log("Server is Running..."));
